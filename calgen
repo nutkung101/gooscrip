@@ -1,0 +1,37 @@
+// Presented by BrilliantPy ✓
+/*######################### Editable1 Start #########################*/
+let sheetName = 'การตอบแบบฟอร์ม 1';
+/*#########################  Editable1 End  #########################*/
+// Init
+let ss,sheet,lastRow,lastCol,range,values,title;
+
+function genCode() {
+  initSpreadSheet();
+  let gen_index_col = "";
+  for (let i in title) {
+    let curVar = `"${title[i]}":${i},`;
+    gen_index_col += curVar;
+  }
+  gen_index_col = `let index_col = {${gen_index_col}};`
+  console.log(gen_index_col);
+  let temp_sheet = ss.getSheetByName("temp");
+  temp_sheet.getRange("A1").setValue(gen_index_col);
+}
+
+function initSpreadSheet() {
+  ss = SpreadsheetApp.getActive();
+  sheet = ss.getSheetByName(sheetName);
+  lastRow = sheet.getLastRow();
+  lastCol = sheet.getLastColumn();
+  range = sheet.getDataRange();
+  values = range.getValues();
+  title = values[0];
+  console.log('initSpreadSheet completed');
+}
+
+function addColumn() {
+  initSpreadSheet();
+  for (let i=1;i<=30;i++) {
+    sheet.getRange(1,++lastCol).setValue(`Lorem ipsum dolor sit amet, consectetur adipiscing elit. In malesuada porta purus vitae sollicitudin. Cras maximus lorem bibendum sem pretium faucibus. Sed cursus ut mauris id tristique. Vestibulum vestibulum ultrices velit, et pretium justo varius nec. Vivamus ac mi tristique nisl facilisis ultrices. In finibus nisl quis nulla auctor, bibendum hendrerit est posuere. Aliquam facilisis fringilla mi, ut pulvinar erat interdum sed.${i}`);
+  }
+}
